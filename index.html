@@ -1,1 +1,736 @@
-https://claude.ai/public/artifacts/06ee8bbd-f01a-4294-84b6-9e8097da5149
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Sakthi | Wave</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --p:#4e8a5e;--pl:rgba(78,138,94,.11);--p2:rgba(78,138,94,.24);
+  --bg:#f7f7f5;--fg:#0f0f0e;--muted:#5e5e5a;--border:rgba(0,0,0,.09);
+  --card:rgba(255,255,255,.75);--sbg:rgba(255,255,255,.5);--r:14px;
+  --glass:rgba(247,247,245,.82);--ff:'Inter',sans-serif;
+  --sh:0 2px 24px rgba(0,0,0,.07);
+}
+.dark{
+  --bg:#090909;--fg:#ededed;--muted:#7c7c78;--border:rgba(255,255,255,.08);
+  --card:rgba(16,18,16,.8);--sbg:rgba(255,255,255,.05);
+  --glass:rgba(10,11,10,.84);
+  --sh:0 2px 24px rgba(0,0,0,.4);
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--ff);background:var(--bg);color:var(--fg);overflow-x:hidden;-webkit-font-smoothing:antialiased;transition:color .3s,background .3s}
+
+/* ── GLOBAL BG ── */
+#gbg{position:fixed;inset:0;z-index:-1;pointer-events:none;width:100%;height:100%}
+
+/* ══════════════════════════════
+   NAV
+══════════════════════════════ */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:var(--glass);
+  backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);
+  border-bottom:1px solid var(--border);
+}
+.nav-i{
+  max-width:1120px;margin:0 auto;padding:0 2rem;
+  display:grid;grid-template-columns:1fr auto 1fr;
+  align-items:center;height:60px;
+}
+
+/* left nav links */
+.nav-links{display:flex;align-items:center;gap:2px}
+.nav-link{
+  font-size:.8rem;font-weight:500;color:var(--muted);
+  text-decoration:none;padding:6px 12px;border-radius:8px;
+  transition:color .18s,background .18s;white-space:nowrap;
+  position:relative;
+}
+.nav-link:hover{color:var(--fg);background:var(--sbg)}
+
+/* nav tooltip — always opens DOWNWARD so it stays in viewport */
+.nav-link .ntip{
+  display:none;position:absolute;
+  top:calc(100% + 10px);  /* below the link */
+  left:50%;transform:translateX(-50%);
+  background:var(--fg);color:var(--bg);
+  font-size:.71rem;font-weight:500;
+  padding:6px 12px;border-radius:8px;
+  white-space:nowrap;pointer-events:none;z-index:200;
+  box-shadow:0 4px 16px rgba(0,0,0,.18);
+}
+.nav-link .ntip::before{
+  content:'';position:absolute;
+  bottom:100%;left:50%;transform:translateX(-50%);
+  border:5px solid transparent;
+  border-bottom-color:var(--fg); /* arrow points UP */
+}
+.nav-link:hover .ntip{display:block}
+
+/* center brand */
+.nav-brand{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  font-size:.92rem;font-weight:800;color:var(--fg);
+  text-decoration:none;letter-spacing:-.025em;white-space:nowrap;
+}
+.brand-dot{
+  width:24px;height:24px;border-radius:7px;
+  background:linear-gradient(135deg,var(--p),#3a6b4e);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.brand-dot svg{width:13px;height:13px;stroke:white;stroke-width:2;fill:none;stroke-linecap:round}
+.brand-wave{color:var(--p)}
+
+/* right controls */
+.nav-right{display:flex;align-items:center;gap:.4rem;justify-content:flex-end}
+.icon-btn{
+  background:none;border:none;cursor:pointer;color:var(--muted);
+  padding:7px;border-radius:8px;display:flex;align-items:center;
+  transition:background .18s,color .18s;
+  position:relative;
+}
+.icon-btn:hover{background:var(--sbg);color:var(--fg)}
+
+/* theme toggle tooltip — opens DOWN, aligned to RIGHT edge */
+.icon-btn .ntip{
+  display:none;position:absolute;
+  top:calc(100% + 10px);
+  right:0;left:auto;transform:none; /* right-aligned */
+  background:var(--fg);color:var(--bg);
+  font-size:.71rem;font-weight:500;
+  padding:6px 12px;border-radius:8px;
+  white-space:nowrap;pointer-events:none;z-index:200;
+  box-shadow:0 4px 16px rgba(0,0,0,.18);
+}
+.icon-btn .ntip::before{
+  content:'';position:absolute;
+  bottom:100%;right:10px;left:auto;transform:none;
+  border:5px solid transparent;
+  border-bottom-color:var(--fg);
+}
+.icon-btn:hover .ntip{display:block}
+
+/* ══════════════════════════════
+   SECTIONS
+══════════════════════════════ */
+section{padding:5rem 0;border-top:1px solid var(--border)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 2rem}
+.s-label{font-size:.63rem;font-weight:700;letter-spacing:.15em;color:var(--p);text-transform:uppercase;margin-bottom:.55rem}
+h2{font-size:clamp(1.7rem,3vw,2.3rem);font-weight:800;letter-spacing:-.04em;color:var(--fg);margin-bottom:1.5rem;line-height:1.08}
+
+/* glass card */
+.gc{
+  background:var(--card);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid var(--border);border-radius:20px;
+  box-shadow:var(--sh);
+}
+
+/* ── HERO ── */
+.hero{position:relative;min-height:88vh;display:flex;align-items:center;border-top:none!important}
+.hero-c{max-width:1120px;margin:0 auto;padding:0 2rem;width:100%}
+.eyebrow{font-size:.68rem;font-weight:700;letter-spacing:.16em;color:var(--p);text-transform:uppercase;margin-bottom:1.3rem;display:flex;align-items:center;gap:9px}
+.eyebrow::before{content:'';display:inline-block;width:18px;height:1.5px;background:var(--p)}
+.hero-h{font-size:clamp(3rem,7vw,5.5rem);font-weight:800;line-height:1.02;letter-spacing:-.045em;margin-bottom:1.4rem}
+.hero-h .acc{color:var(--p);font-style:italic;font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(3.1rem,7.5vw,5.8rem)}
+.hero-sub{font-size:.95rem;color:var(--muted);max-width:440px;line-height:1.85;margin-bottom:2.2rem}
+.cta-row{display:flex;gap:10px;flex-wrap:wrap}
+.btn-p{
+  display:inline-flex;align-items:center;gap:8px;padding:11px 22px;
+  border-radius:100px;background:var(--p);color:#fff;
+  font-family:var(--ff);font-weight:600;font-size:.83rem;border:none;cursor:pointer;
+  text-decoration:none;transition:all .18s;
+  box-shadow:0 4px 16px rgba(78,138,94,.3);
+}
+.btn-p:hover{opacity:.87;transform:translateY(-1px)}
+.btn-o{
+  display:inline-flex;align-items:center;gap:8px;padding:11px 22px;
+  border-radius:100px;background:var(--card);color:var(--fg);
+  font-family:var(--ff);font-weight:500;font-size:.83rem;
+  border:1.5px solid var(--border);cursor:pointer;text-decoration:none;
+  transition:all .18s;
+}
+.btn-o:hover{border-color:var(--p);color:var(--p);transform:translateY(-1px)}
+
+/* ── ABOUT ── */
+.about-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:3.5rem;align-items:start}
+.about-text p{font-size:.92rem;line-height:1.84;color:var(--muted);margin-bottom:.95rem;max-width:520px}
+.facts{display:flex;flex-direction:column;gap:8px}
+.fact{
+  padding:16px 18px;border-radius:var(--r);background:var(--sbg);
+  border:1px solid var(--border);position:relative;cursor:default;
+  transition:border-color .18s;
+}
+.fact:hover{border-color:var(--p2)}
+.fact-n{font-size:1.55rem;font-weight:800;color:var(--p);letter-spacing:-.04em;line-height:1}
+.fact-d{font-size:.75rem;color:var(--muted);margin-top:4px}
+
+/* generic tooltip: opens downward by default */
+.tip{
+  display:none;position:absolute;
+  top:calc(100% + 8px);left:50%;transform:translateX(-50%);
+  background:var(--fg);color:var(--bg);font-size:.71rem;font-weight:500;
+  padding:5px 11px;border-radius:7px;white-space:nowrap;
+  pointer-events:none;z-index:150;box-shadow:0 4px 14px rgba(0,0,0,.15);
+}
+.tip::before{
+  content:'';position:absolute;bottom:100%;left:50%;transform:translateX(-50%);
+  border:5px solid transparent;border-bottom-color:var(--fg);
+}
+.fact:hover .tip,.skill-chip:hover .tip,.exp-tag:hover .tip,.c-link:hover .tip{display:block}
+
+/* ── SKILLS ── */
+.skills-wrap{display:flex;flex-wrap:wrap;gap:7px;position:relative}
+.skill-chip{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:8px 14px;border-radius:100px;
+  background:var(--sbg);border:1px solid var(--border);
+  font-size:.8rem;font-weight:500;color:var(--fg);
+  transition:all .2s;cursor:default;
+  position:relative;
+  /* key: tooltip will render outside chip bounds */
+  overflow:visible;
+}
+.skill-chip:hover{border-color:var(--p);background:var(--pl);color:var(--p);transform:translateY(-2px);z-index:10}
+.dot{width:4px;height:4px;border-radius:50%;background:currentColor;flex-shrink:0}
+
+/* skill tooltip — always ABOVE the chip */
+.skill-chip .tip{
+  bottom:calc(100% + 8px);
+  top:auto;
+  left:50%;transform:translateX(-50%);
+}
+.skill-chip .tip::before{
+  bottom:auto;top:100%;
+  border-bottom-color:transparent;
+  border-top-color:var(--fg);
+}
+
+/* ── EXPERIENCE ── */
+.exp-list{display:flex;flex-direction:column}
+.exp-item{padding:22px 0;border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr auto;gap:1.5rem;align-items:start}
+.exp-item:last-child{border-bottom:none}
+.exp-role{font-size:.92rem;font-weight:700;color:var(--fg);margin-bottom:3px}
+.exp-co{font-size:.79rem;color:var(--p);font-weight:500}
+.exp-desc{font-size:.84rem;color:var(--muted);line-height:1.74;margin-top:8px;max-width:580px}
+.exp-yr{font-size:.74rem;color:var(--muted);font-weight:600;white-space:nowrap;padding-top:2px}
+.tag-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.exp-tag{
+  display:inline-flex;align-items:center;padding:4px 10px;border-radius:20px;
+  background:var(--pl);color:var(--p);font-size:.7rem;font-weight:600;
+  letter-spacing:.04em;position:relative;cursor:default;overflow:visible;
+}
+/* exp tag tooltip — above */
+.exp-tag .tip{bottom:calc(100% + 7px);top:auto;left:50%;transform:translateX(-50%)}
+.exp-tag .tip::before{bottom:auto;top:100%;border-bottom-color:transparent;border-top-color:var(--fg)}
+
+/* ── WAVE SECTION ── */
+#wave-sec{position:relative;overflow:hidden}
+.wave-sec-bg{position:absolute;inset:0;z-index:0;pointer-events:none}
+.wave-sec-inner{position:relative;z-index:1}
+.wave-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:start}
+.wave-left p{font-size:.9rem;color:var(--muted);line-height:1.8;margin-bottom:1.1rem;max-width:380px}
+
+/* accordion */
+.acc-list{display:flex;flex-direction:column;gap:5px}
+.acc-item{border:1px solid var(--border);border-radius:var(--r);overflow:hidden;background:var(--card);transition:border-color .18s}
+.acc-item:hover{border-color:var(--p2)}
+.acc-q{
+  width:100%;display:flex;align-items:center;justify-content:space-between;
+  padding:13px 16px;background:none;border:none;cursor:pointer;
+  text-align:left;font-family:var(--ff);font-size:.83rem;font-weight:600;
+  color:var(--fg);gap:.8rem;line-height:1.4;
+}
+.acc-q:hover{background:rgba(78,138,94,.04)}
+.chev{width:13px;height:13px;flex-shrink:0;color:var(--p);transition:transform .22s;stroke-width:2.5}
+.chev.open{transform:rotate(180deg)}
+.acc-a{max-height:0;overflow:hidden;transition:max-height .32s ease,padding .3s;padding:0 16px;font-size:.82rem;color:var(--muted);line-height:1.78}
+.acc-a.open{max-height:340px;padding:10px 16px 14px;border-top:1px solid var(--border)}
+.ci{font-family:monospace;font-size:.77rem;background:var(--sbg);border:1px solid var(--border);padding:1px 6px;border-radius:4px;color:var(--p)}
+
+/* ── CONTACT ── */
+.contact-stack{display:flex;flex-direction:column;gap:8px;max-width:460px;margin-top:.4rem}
+.c-link{
+  display:flex;align-items:center;gap:13px;padding:14px 16px;
+  border-radius:var(--r);border:1px solid var(--border);
+  background:var(--card);text-decoration:none;color:var(--fg);
+  transition:all .18s;
+  position:relative;
+  overflow:visible;  /* tooltip must escape the card */
+}
+.c-link:hover{border-color:var(--p);background:var(--pl);transform:translateX(4px)}
+.c-icon{width:32px;height:32px;border-radius:8px;background:var(--pl);color:var(--p);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.c-icon svg{width:14px;height:14px;stroke-width:2}
+.c-meta{flex:1}
+.c-lbl{font-size:.64rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700;margin-bottom:2px}
+.c-val{font-size:.85rem;font-weight:500}
+.c-arr svg{width:13px;height:13px;stroke-width:2;color:var(--muted)}
+
+/* contact tooltip — ABOVE each link */
+.c-link .tip{
+  bottom:calc(100% + 8px);top:auto;
+  left:20px;transform:none;
+}
+.c-link .tip::before{
+  bottom:auto;top:100%;
+  left:16px;transform:none;
+  border-bottom-color:transparent;border-top-color:var(--fg);
+}
+
+footer{border-top:1px solid var(--border);padding:1.3rem 0}
+.foot-i{max-width:1120px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;font-size:.74rem;color:var(--muted);flex-wrap:wrap;gap:.5rem}
+
+/* ── WAVE POPUP ── */
+#wpop{
+  position:fixed;bottom:1.25rem;right:1.25rem;z-index:500;
+  width:360px;max-width:calc(100vw - 2rem);
+  display:flex;flex-direction:column;
+  background:var(--glass);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);
+  border:1px solid var(--border);border-radius:18px;
+  box-shadow:0 20px 60px rgba(0,0,0,.2);height:500px;
+  transform:scale(.88) translateY(28px);opacity:0;
+  transform-origin:bottom right;
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1),opacity .22s ease;
+  pointer-events:none;overflow:hidden;
+}
+#wpop.show{transform:scale(1) translateY(0);opacity:1;pointer-events:all}
+#wpop.mini{height:54px}
+#wpop.mini .wbody,#wpop.mini .winput{display:none}
+.whead{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid var(--border);flex-shrink:0}
+.whead-l{display:flex;align-items:center;gap:10px}
+.wlogo{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--p),#3a6b4e);display:flex;align-items:center;justify-content:center}
+.wlogo svg{width:14px;height:14px;stroke:white;stroke-width:2;fill:none;stroke-linecap:round}
+.wtitle{font-size:.86rem;font-weight:700;color:var(--fg)}
+.wsub{font-size:.62rem;color:var(--muted)}
+.wctrl{display:flex;gap:2px}
+.wbtn{width:26px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;background:none;border:none;cursor:pointer;color:var(--muted);transition:background .15s,color .15s}
+.wbtn:hover{background:var(--sbg);color:var(--fg)}
+.wbtn svg{width:11px;height:11px;stroke-width:2.5}
+.wbody{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;scroll-behavior:smooth}
+.msg{display:flex}
+.msg.u{justify-content:flex-end}
+.bubble{max-width:83%;padding:9px 12px;border-radius:14px;font-size:.83rem;line-height:1.64;word-break:break-word}
+.msg.u .bubble{background:linear-gradient(135deg,var(--p),#3a6b4e);color:#fff;border-bottom-right-radius:3px}
+.msg.a .bubble{background:var(--sbg);border:1px solid var(--border);color:var(--fg);border-bottom-left-radius:3px}
+.dots{display:flex;gap:4px;align-items:center;padding:2px 0}
+.dots span{width:5px;height:5px;border-radius:50%;background:var(--muted);animation:db 1.2s infinite}
+.dots span:nth-child(2){animation-delay:.2s}
+.dots span:nth-child(3){animation-delay:.4s}
+@keyframes db{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-5px)}}
+.winput{padding:9px;border-top:1px solid var(--border);flex-shrink:0;display:flex;gap:7px;align-items:center}
+.winp{flex:1;padding:8px 13px;border-radius:100px;border:1.5px solid var(--border);background:var(--bg);color:var(--fg);font-family:var(--ff);font-size:.82rem;outline:none;transition:border-color .18s}
+.winp:focus{border-color:var(--p)}
+.wsend{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--p),#3a6b4e);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:opacity .18s,transform .15s}
+.wsend:disabled{opacity:.28;cursor:default}
+.wsend:not(:disabled):hover{opacity:.82;transform:scale(1.08)}
+.wsend svg{width:12px;height:12px;stroke-width:2;fill:none;stroke:white}
+
+@media(max-width:820px){
+  .about-grid,.wave-grid{grid-template-columns:1fr}
+  .exp-item{grid-template-columns:1fr}
+  .exp-yr{display:none}
+}
+@media(max-width:600px){
+  .hero-h{font-size:2.7rem}
+  section{padding:3.5rem 0}
+  .nav-links .nav-link:not(:first-child):not(:last-child){display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- GLOBAL BACKGROUND CANVAS -->
+<canvas id="gbg"></canvas>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-i">
+    <!-- left: nav links -->
+    <div class="nav-links">
+      <a href="#about" class="nav-link">About<span class="ntip">Who I am & how I think</span></a>
+      <a href="#experience" class="nav-link">Experience<span class="ntip">Where I've worked & what I've built</span></a>
+      <a href="#wave-sec" class="nav-link">Wave<span class="ntip">The AI project built into this page</span></a>
+      <a href="#contact" class="nav-link">Contact<span class="ntip">Open to the right conversations</span></a>
+    </div>
+    <!-- center: brand -->
+    <a href="#" class="nav-brand">
+      <div class="brand-dot">
+        <svg viewBox="0 0 24 24"><path d="M2 14 Q5 10 8 14 T14 14"/><path d="M8 10 Q11 6 14 10 T20 10"/></svg>
+      </div>
+      Sakthi&nbsp;<span style="color:var(--border);font-weight:300">|</span>&nbsp;<span class="brand-wave">Wave</span>
+    </a>
+    <!-- right: theme toggle -->
+    <div style="display:flex;justify-content:flex-end">
+      <button class="icon-btn" id="tbtn" aria-label="Toggle theme">
+        <svg id="imoon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        <svg id="isun" style="display:none" xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <span class="ntip" id="theme-tip">Switch to dark mode ✦</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-c">
+    <div class="eyebrow">Generative AI Engineer</div>
+    <h1 class="hero-h">Building<br>Intelligent<br><span class="acc">Systems.</span></h1>
+    <p class="hero-sub">I'm Sakthi — working with language models and AI systems for ~2.5 years. RAG architectures, prompt design, LLM integration — from early exploration through tested implementations.</p>
+    <div class="cta-row">
+      <button class="btn-p" onclick="openWave()">
+        Talk to Wave
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+      <a href="#contact" class="btn-o" id="gib">Get in touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="s-label">About</div>
+    <div class="about-grid">
+      <div>
+        <h2>A bit about me</h2>
+        <div class="about-text">
+          <p>I'm Sakthi — a Generative AI Engineer with ~2.5 years working closely with language models and AI systems. My focus has been on understanding how these systems behave, where they fail, and how to shape them into something genuinely useful.</p>
+          <p>Most of my work has involved RAG architectures, prompt design, and integrating LLMs into functional pipelines. I've taken ideas from early exploration through to tested, working implementations — and learned a lot along the way.</p>
+          <p>I care about AI that's honest and purposeful. Less noise, more substance.</p>
+        </div>
+      </div>
+      <div class="facts">
+        <div class="fact">
+          <div class="fact-n">2.5<span style="font-size:.95rem;font-weight:600">yr</span></div>
+          <div class="fact-d">hands-on with AI systems</div>
+          <div class="tip">From first notebooks to tested pipelines</div>
+        </div>
+        <div class="fact">
+          <div class="fact-n">RAG<span style="font-size:.82rem;font-weight:500;margin-left:6px;color:var(--muted)">focused</span></div>
+          <div class="fact-d">Retrieval-Augmented Generation</div>
+          <div class="tip">Grounding LLMs in data, not just prompts</div>
+        </div>
+        <div class="fact">
+          <div class="fact-n">AWS<span style="font-size:.82rem;font-weight:500;margin-left:6px;color:var(--muted)">explored</span></div>
+          <div class="fact-d">Cloud-native AI tooling</div>
+          <div class="tip">Bedrock · Lambda · SageMaker</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="wrap">
+    <div class="s-label">Experience</div>
+    <h2>Where I've worked</h2>
+    <div class="exp-list" id="exp-list"></div>
+
+    <!-- Skills -->
+    <div style="margin-top:3rem">
+      <div class="s-label">What I work with</div>
+      <div class="skills-wrap" id="skills-wrap" style="margin-top:.9rem"></div>
+    </div>
+  </div>
+</section>
+
+<!-- WAVE SECTION -->
+<section id="wave-sec">
+  <canvas class="wave-sec-bg" id="waveCv"></canvas>
+  <div class="wave-sec-inner wrap">
+    <div class="s-label">AI Project</div>
+    <h2>Sakthi | Wave —<br>not just a chatbot.</h2>
+    <div class="wave-grid">
+      <div class="wave-left">
+        <p>Wave is an AI assistant built directly into this page — a project I'm actively developing. No login, no third-party account. Everything runs right here in the browser.</p>
+        <p>Right now, Wave knows about me and holds context across your session. The bigger idea: an AI presence that feels less like a tool you query and more like someone who actually knows you.</p>
+        <p style="font-size:.8rem;font-style:italic;opacity:.6">Early stages — but you can feel the direction.</p>
+        <button onclick="openWave()" style="display:inline-flex;align-items:center;gap:8px;margin-top:.9rem;padding:10px 18px;border-radius:100px;background:var(--pl);border:1.5px solid var(--p2);color:var(--p);font-size:.82rem;font-weight:600;cursor:pointer;font-family:var(--ff);transition:all .18s">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 14 Q5 10 8 14 T14 14"/><path d="M5 18 Q8 14 11 18 T17 18"/><path d="M8 10 Q11 6 14 10 T20 10"/></svg>
+          Open Wave
+        </button>
+      </div>
+      <div class="acc-list" id="acc-list"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="s-label">Contact</div>
+    <h2>Let's talk</h2>
+    <p style="font-size:.91rem;color:var(--muted);margin-bottom:1.5rem;max-width:400px;line-height:1.78">A project, a role, or just a question — reach out directly.</p>
+    <div class="contact-stack">
+      <a href="mailto:sakthigrish.in@gmail.com" class="c-link">
+        <div class="c-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <div class="c-meta"><div class="c-lbl">Email</div><div class="c-val">sakthigrish.in@gmail.com</div></div>
+        <div class="c-arr"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></div>
+        <div class="tip">Usually reply within a day</div>
+      </a>
+      <a href="https://linkedin.com/in/sakthigrish04" target="_blank" rel="noopener" class="c-link">
+        <div class="c-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
+        <div class="c-meta"><div class="c-lbl">LinkedIn</div><div class="c-val">linkedin.com/in/sakthigrish04</div></div>
+        <div class="c-arr"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></div>
+        <div class="tip">Full profile · open to connect</div>
+      </a>
+      <a href="tel:+919944330689" class="c-link">
+        <div class="c-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.64 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.56 1.34h3a2 2 0 0 1 2 1.72c.13.97.36 1.92.7 2.84a2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.92.34 1.87.57 2.84.7A2 2 0 0 1 21 16.92z"/></svg></div>
+        <div class="c-meta"><div class="c-lbl">Phone</div><div class="c-val">+91 99443 30689</div></div>
+        <div class="c-arr"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></div>
+        <div class="tip">WhatsApp works too</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-i">
+    <span>© 2025 Sakthi | Wave</span>
+    <span style="opacity:.5">Built with intent.</span>
+  </div>
+</footer>
+
+<!-- WAVE POPUP -->
+<div id="wpop">
+  <div class="whead">
+    <div class="whead-l">
+      <div class="wlogo"><svg viewBox="0 0 24 24"><path d="M2 14 Q5 10 8 14 T14 14"/><path d="M5 18 Q8 14 11 18 T17 18"/><path d="M8 10 Q11 6 14 10 T20 10"/></svg></div>
+      <div><div class="wtitle">Wave</div><div class="wsub">by Sakthi</div></div>
+    </div>
+    <div class="wctrl">
+      <button class="wbtn" id="wmin"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+      <button class="wbtn" id="wcls"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+  </div>
+  <div class="wbody" id="wbody">
+    <div class="msg a"><div class="bubble">Hey — I'm Wave. Ask me about Sakthi's work, skills, or what he's exploring. Or just ask anything.</div></div>
+  </div>
+  <div class="winput">
+    <input type="text" id="winp" class="winp" placeholder="Ask Wave anything…" autocomplete="off"/>
+    <button class="wsend" id="wsnd" disabled>
+      <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+// ── THEME ──
+const html=document.documentElement;
+let dark=(localStorage.getItem('sw-t')||'light')==='dark';
+apply();
+document.getElementById('tbtn').onclick=()=>{dark=!dark;localStorage.setItem('sw-t',dark?'dark':'light');apply();};
+function apply(){
+  dark?html.classList.add('dark'):html.classList.remove('dark');
+  document.getElementById('imoon').style.display=dark?'none':'';
+  document.getElementById('isun').style.display=dark?'':'none';
+  const tip=document.getElementById('theme-tip');
+  if(tip)tip.textContent=dark?'☀️  Switch to light mode':'✦  Switch to dark mode';
+}
+
+// ── GLOBAL BG ──
+(function(){
+  const cv=document.getElementById('gbg'),cx=cv.getContext('2d');
+  let W,H,orbs=[],ti=0;
+  const resize=()=>{W=cv.width=window.innerWidth;H=cv.height=window.innerHeight;seedOrbs();};
+  function seedOrbs(){
+    orbs=[
+      {x:W*.12,y:H*.18,r:W*.32,vx:.09,vy:.05,h:148},
+      {x:W*.8,y:H*.3,r:W*.25,vx:-.08,vy:.07,h:160},
+      {x:W*.5,y:H*.72,r:W*.28,vx:.06,vy:-.08,h:142},
+      {x:W*.88,y:H*.82,r:W*.2,vx:-.07,vy:-.06,h:155},
+    ];
+  }
+  function draw(){
+    cx.clearRect(0,0,W,H);
+    const d=html.classList.contains('dark');
+    // base
+    const g=cx.createLinearGradient(0,0,W,H);
+    if(d){g.addColorStop(0,'#060807');g.addColorStop(1,'#070909');}
+    else{g.addColorStop(0,'#f5f7f5');g.addColorStop(1,'#f3f6f4');}
+    cx.fillStyle=g;cx.fillRect(0,0,W,H);
+    // orbs
+    orbs.forEach(o=>{
+      const rg=cx.createRadialGradient(o.x,o.y,0,o.x,o.y,o.r);
+      if(d){rg.addColorStop(0,`hsla(${o.h},36%,20%,.3)`);rg.addColorStop(.55,`hsla(${o.h},28%,12%,.13)`);rg.addColorStop(1,`hsla(${o.h},20%,6%,0)`);}
+      else{rg.addColorStop(0,`hsla(${o.h},42%,72%,.22)`);rg.addColorStop(.55,`hsla(${o.h},36%,82%,.1)`);rg.addColorStop(1,`hsla(${o.h},30%,92%,0)`);}
+      cx.beginPath();cx.arc(o.x,o.y,o.r,0,Math.PI*2);cx.fillStyle=rg;cx.fill();
+      o.x+=o.vx;o.y+=o.vy;
+      if(o.x<-o.r)o.x=W+o.r;if(o.x>W+o.r)o.x=-o.r;
+      if(o.y<-o.r)o.y=H+o.r;if(o.y>H+o.r)o.y=-o.r;
+    });
+    // subtle wave lines
+    const a=d?.055:.038;
+    [[.22,.07,.008,ti*.38,a],[.44,.08,.011,ti*.52+1,a*.75],[.65,.06,.009,ti*.36+2,a*.6],[.83,.065,.012,ti*.46+3,a*.45]].forEach(([yr,amp,fr,ph,al])=>{
+      cx.beginPath();cx.moveTo(0,H*yr);
+      for(let x=0;x<=W;x+=4)cx.lineTo(x,H*yr+Math.sin(x*fr+ph)*H*amp);
+      cx.strokeStyle=`rgba(78,138,94,${al})`;cx.lineWidth=1.1;cx.stroke();
+    });
+    ti+=.007;requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize',resize);
+  resize();draw();
+})();
+
+// ── WAVE SECTION BG ──
+(function(){
+  const cv=document.getElementById('waveCv');if(!cv)return;
+  const cx=cv.getContext('2d');let ti=0;
+  function resize(){
+    const p=cv.parentElement;
+    cv.width=p?p.offsetWidth:window.innerWidth;
+    cv.height=p?p.offsetHeight:400;
+    cv.style.position='absolute';cv.style.inset='0';
+  }
+  function draw(){
+    const W=cv.width,H=cv.height,d=html.classList.contains('dark');
+    cx.clearRect(0,0,W,H);
+    [[.18,.08,.009,ti*.42,.14],[.4,.09,.012,ti*.58+1,.1],[.62,.065,.01,ti*.4+2,.08],[.8,.07,.011,ti*.5+3,.06]].forEach(([yr,amp,fr,ph,al])=>{
+      cx.beginPath();cx.moveTo(0,H*yr);
+      for(let x=0;x<=W;x+=3)cx.lineTo(x,H*yr+Math.sin(x*fr+ph)*H*amp);
+      cx.strokeStyle=`rgba(78,138,94,${d?al:al*.7})`;cx.lineWidth=1.3;cx.stroke();
+    });
+    ti+=.008;requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize',resize);resize();draw();
+})();
+
+// ── SKILLS ──
+const skills=[
+  {n:'Retrieval-Augmented Generation',t:'Chunking · embedding · vector retrieval · re-ranking'},
+  {n:'Large Language Models',t:'GPT-4 · Claude · Mistral · Llama'},
+  {n:'Prompt Engineering',t:'Structured output · chain-of-thought · few-shot'},
+  {n:'Semantic Search',t:'Dense retrieval via embedding similarity'},
+  {n:'Python',t:'Pipelines · APIs · data processing'},
+  {n:'AWS Bedrock / Lambda / S3',t:'Cloud-hosted inference and storage'},
+  {n:'LangChain / LlamaIndex',t:'LLM orchestration frameworks'},
+  {n:'Vector Databases',t:'Pinecone · Weaviate · pgvector'},
+  {n:'FastAPI',t:'Serving AI capabilities over clean REST APIs'},
+  {n:'Fine-tuning & Evaluation',t:'LoRA · PEFT · RAGAS · LLM-as-judge'},
+  {n:'Embeddings',t:'OpenAI · sentence-transformers · BGE'},
+  {n:'NLP',t:'Classification · NER · similarity · summarisation'},
+];
+const sw=document.getElementById('skills-wrap');
+skills.forEach(s=>{
+  const el=document.createElement('div');el.className='skill-chip';
+  el.innerHTML=`<div class="dot"></div>${s.n}<div class="tip">${s.t}</div>`;
+  sw.appendChild(el);
+});
+
+// ── EXPERIENCE ──
+const exps=[
+  {role:'Generative AI Engineer',co:'Data-driven IT Services Company',yr:'Apr 2025 — Present',
+   desc:'Designing and iterating on RAG pipelines — embedding strategy, chunking approaches, retrieval tuning, and prompt design. Focused on understanding where LLM outputs become inconsistent and improving reliability across different query patterns.',
+   tags:[{t:'RAG Pipelines',tip:'Chunking · embedding · hybrid retrieval'},{t:'AWS Bedrock',tip:'Foundation model hosting on cloud'},{t:'Prompt Design',tip:'Structured, consistent LLM output'},{t:'LangChain',tip:'Pipeline orchestration'}]},
+  {role:'AI / ML Engineer',co:'Digital Transformation & IT Services Company',yr:'Nov 2023 — Apr 2025',
+   desc:'Worked on ML models for text classification, semantic similarity, and document processing pipelines. Built familiarity with data pipelines, model evaluation metrics, and cloud tooling — foundations that now shape how I approach LLM-based systems.',
+   tags:[{t:'Semantic Search',tip:'Embedding-based dense retrieval'},{t:'NLP',tip:'Classification · similarity · extraction'},{t:'Python / FastAPI',tip:'AI capabilities via REST APIs'},{t:'Model Evaluation',tip:'Metrics-driven iteration'}]},
+];
+const el=document.getElementById('exp-list');
+exps.forEach(e=>{
+  const d=document.createElement('div');d.className='exp-item';
+  d.innerHTML=`<div><div class="exp-role">${e.role}</div><div class="exp-co">${e.co}</div><div class="exp-desc">${e.desc}</div><div class="tag-row">${e.tags.map(t=>`<span class="exp-tag">${t.t}<div class="tip">${t.tip}</div></span>`).join('')}</div></div><div class="exp-yr">${e.yr}</div>`;
+  el.appendChild(d);
+});
+
+// ── ACCORDION ──
+const accData=[
+  {q:'What is Wave?',
+   a:'Wave is an AI assistant embedded directly into this page — no external login, no third-party account. It calls the <span class="ci">Anthropic /v1/messages</span> API from the browser, using a structured system prompt that grounds the model with context about Sakthi\'s background, skills, and work.'},
+  {q:'How does context work across turns?',
+   a:'Every request includes the full conversation <span class="ci">messages[]</span> array — so Wave remembers what was said earlier in the session. It\'s a stateful chat pattern built on top of a stateless API. Future work involves persisting this across sessions via a backend store.'},
+  {q:'How is the grounding built?',
+   a:'The system prompt encodes Sakthi\'s profile — skills (RAG, LangChain, Bedrock, embeddings), experience, and approach — as structured context. Lightweight RAG-adjacent: instead of live vector retrieval, knowledge is baked into the prompt at load time. Next step is moving to dynamic retrieval as the knowledge base grows.'},
+  {q:'What\'s technically planned next?',
+   a:'Persistent memory across sessions (Supabase/Postgres backend), an API proxy to keep credentials server-side, and dynamic context retrieval using embeddings — a proper RAG setup. The frontend stays zero-dependency by design.'},
+];
+const al=document.getElementById('acc-list');
+accData.forEach((item,i)=>{
+  const d=document.createElement('div');d.className='acc-item';
+  d.innerHTML=`<button class="acc-q">${item.q}<svg class="chev${i===0?' open':''}" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="6 9 12 15 18 9"/></svg></button><div class="acc-a${i===0?' open':''}">${item.a}</div>`;
+  d.querySelector('.acc-q').addEventListener('click',()=>{
+    const a=d.querySelector('.acc-a'),c=d.querySelector('.chev');
+    const o=a.classList.toggle('open');c.classList.toggle('open',o);
+  });
+  al.appendChild(d);
+});
+
+// ── GET IN TOUCH → smooth scroll to contact ──
+document.getElementById('gib').addEventListener('click',e=>{
+  e.preventDefault();
+  document.getElementById('contact').scrollIntoView({behavior:'smooth',block:'start'});
+});
+
+// ── WAVE POPUP ──
+const pop=document.getElementById('wpop');
+const wbody=document.getElementById('wbody');
+const winp=document.getElementById('winp');
+const wsnd=document.getElementById('wsnd');
+let minimized=false;
+const history=[];
+
+const SYS=`You are Wave, an AI assistant on Sakthi's portfolio (Sakthi | Wave).
+
+About Sakthi:
+- Name: Sakthigrish, goes by Sakthi. Location: India.
+- Role: Generative AI Engineer, ~2.5 years in AI/ML
+- Skills: RAG pipelines (chunking, embedding, retrieval, re-ranking), LLMs (GPT-4, Claude, Mistral, Llama), Prompt Engineering, Semantic Search, Embeddings (OpenAI, sentence-transformers, BGE), Python, AWS (Bedrock, Lambda, S3, SageMaker), LangChain, LlamaIndex, Vector DBs (Pinecone, Weaviate, pgvector), FastAPI, Fine-tuning (LoRA/PEFT), Model Evaluation (RAGAS, LLM-as-judge), NLP
+- Work: hands-on tested implementations, not all production-scaled — honest about that
+- Open to: freelance, full-time, AI/LLM collaborations
+- Contact: sakthigrish.in@gmail.com | LinkedIn: sakthigrish04 | +91 9944330689
+
+About Wave:
+- Browser-based, calls Anthropic API directly, stateful via full message history per request
+- System prompt = lightweight RAG-adjacent grounding
+- Future: persistent memory, API proxy backend, vector retrieval
+
+Tone: direct, warm, honest. Short unless depth is useful.`;
+
+function openWave(){minimized=false;pop.classList.remove('mini');pop.classList.add('show');setTimeout(()=>winp.focus(),320);}
+function closeWave(){
+  pop.classList.remove('show');
+  setTimeout(()=>{pop.classList.remove('mini');minimized=false;
+    wbody.innerHTML='<div class="msg a"><div class="bubble">Hey — I\'m Wave. Ask me about Sakthi\'s work, skills, or what he\'s exploring. Or just ask anything.</div></div>';
+    history.length=0;},280);
+}
+document.getElementById('wmin').onclick=()=>{minimized=!minimized;pop.classList.toggle('mini',minimized);};
+document.getElementById('wcls').onclick=closeWave;
+winp.addEventListener('input',()=>{wsnd.disabled=!winp.value.trim();});
+winp.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();}});
+wsnd.addEventListener('click',send);
+
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function addMsg(r,h){const d=document.createElement('div');d.className=`msg ${r==='user'?'u':'a'}`;d.innerHTML=`<div class="bubble">${h}</div>`;wbody.appendChild(d);wbody.scrollTop=wbody.scrollHeight;}
+function showTyping(){const d=document.createElement('div');d.className='msg a';d.id='typ';d.innerHTML='<div class="bubble"><div class="dots"><span></span><span></span><span></span></div></div>';wbody.appendChild(d);wbody.scrollTop=wbody.scrollHeight;}
+function removeTyping(){const e=document.getElementById('typ');if(e)e.remove();}
+
+async function send(){
+  const txt=winp.value.trim();if(!txt)return;
+  winp.value='';wsnd.disabled=true;
+  addMsg('user',esc(txt));showTyping();
+  history.push({role:'user',content:txt});
+  try{
+    const r=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:700,system:SYS,messages:history})
+    });
+    if(!r.ok)throw new Error();
+    const data=await r.json();
+    const reply=(data.content||[]).map(b=>b.text||'').join('')||"Something went wrong — try again?";
+    history.push({role:'assistant',content:reply});
+    removeTyping();
+    addMsg('assistant',esc(reply).replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>'));
+  }catch{
+    removeTyping();
+    addMsg('assistant',"Couldn't reach the server — try again in a moment.");
+  }
+}
+</script>
+</body>
+</html>
