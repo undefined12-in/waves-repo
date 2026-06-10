@@ -9,29 +9,27 @@ export default async function handler(req, res) {
   try {
     const { messages, system } = req.body;
 
-    const contents = messages.map(m => ({
-      role: m.role === 'assistant' ? 'model' : 'user',
-      parts: [{ text: m.content }]
-    }));
-
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
+      `https://api.cloudflare.com/client/v4/accounts/${process.env.CLOUDFLARE_ACCOUNT_ID}/ai/run/@cf/meta/llama-3.1-8b-instruct`,
       {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${process.env.CLOUDFLARE_API_TOKEN}`
+        },
         body: JSON.stringify({
-          system_instruction: { parts: [{ text: system }] },
-          contents
+          system_prompt: system,
+          messages: messages.map(m => ({
+            role: m.role,
+            content: m.content
+          }))
         })
       }
     );
 
     const data = await response.json();
-    
-    // Log full response to debug
-    console.log('Gemini response:', JSON.stringify(data));
-
-    const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "No response from AI.";
+    console.log('CF response:', JSON.stringify(data));
+    const reply = data?.result?.response || "No response from AI.";
     res.status(200).json({ reply });
 
   } catch (err) {
