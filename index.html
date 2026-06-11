@@ -716,13 +716,13 @@ async function send(){
   addMsg('user',esc(txt));showTyping();
   history.push({role:'user',content:txt});
   try{
-    const r=await fetch('https://waves-repo.vercel.app/api/chat',{
+    const r=await fetch('https://undefined12-in-wave-backend.hf.space/chat',{
       method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({messages:history,system:SYS})
+      body:JSON.stringify({message:txt})
     });
     if(!r.ok)throw new Error();
     const data=await r.json();
-    const reply=data.reply||"Something went wrong — try again?";
+    const reply=data.response||"Something went wrong — try again?";
     history.push({role:'assistant',content:reply});
     removeTyping();
     addMsg('assistant',esc(reply).replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>'));
